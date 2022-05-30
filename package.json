@@ -1,16 +1,31 @@
 {
   "name": "node_js_exam",
   "version": "1.0.0",
-  "description": "Node.js Exam, made by Carsten & Julius",
+  "description": "Node.js Exam, made by  Julius",
   "main": "index.js",
+  "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "client": "npm run dev --prefix client",
+    "app": "nodemon.cmd app.js --ignore 'client/'",
+    "dev": "concurrently \"npm run app\" \"npm run client\" "
   },
-  "author": "Carsten & Julius",
+  "author": "Julius",
   "license": "ISC",
   "dependencies": {
+    "bcrypt": "^5.0.1",
+    "concurrently": "^7.1.0",
+    "cookie": "^0.5.0",
     "cors": "^2.8.5",
-    "express": "^4.18.1",
+    "dotenv": "^16.0.0",
+    "express": "^4.17.3",
+    "express-rate-limit": "^6.4.0",
+    "express-session": "^1.17.2",
+    "helmet": "^5.0.2",
+    "jsonwebtoken": "^8.5.1",
+    "mongodb": "^4.5.0",
+    "morgan": "^1.10.0"
+  },
+  "devDependencies": {
     "nodemon": "^2.0.16"
   }
 }
