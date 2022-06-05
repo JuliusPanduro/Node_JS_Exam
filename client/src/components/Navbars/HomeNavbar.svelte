@@ -1,5 +1,12 @@
 <script>
     import  Button  from "../Buttons/Button.svelte";
+
+    import { Link, navigate } from 'svelte-routing';
+
+    function logout() {
+        localStorage.clear();
+        navigate('/',{replace: true})
+    }
 </script>
 
 <header>
@@ -27,7 +34,7 @@
                     <a href="#" class="block mx-4 mt-2 md:mt-0 text-sm text-gray-700 capitalize hover:text-fuchsia-500">Something</a>
                     <a href="#" class="block mx-4 mt-2 md:mt-0 text-sm text-gray-700 capitalize hover:text-fuchsia-500">Something</a>
                 </div>
-                <Button>Logout</Button>
+                <Button on:click={logout}>Logout</Button>
             </div>
         </div>
     </nav>

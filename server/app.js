@@ -22,7 +22,6 @@ app.use(sessionMiddleware);
 import cors from "cors";
 app.use(cors());
 
-
 import rateLimit from "express-rate-limit";
 const authLimiter = rateLimit({
 	windowMs: 15 * 60 * 1000, // 15 minutes
@@ -30,6 +29,18 @@ const authLimiter = rateLimit({
 	standardHeaders: true, // Return rate limit info in the `RateLimit-*` headers
 	legacyHeaders: false, // Disable the `X-RateLimit-*` headers
 });
+
+import http from "http";
+const server = http.createServer(app);
+
+import { Server } from "socket.io";
+const io = new Server(server);
+
+const wrap = middleware => (socket,next) => middleware(socket.request, {},next);
+io.use(wrap);
+
+
+
 
 import router from "./routers/userRouter.js";
 app.use(router,authLimiter);

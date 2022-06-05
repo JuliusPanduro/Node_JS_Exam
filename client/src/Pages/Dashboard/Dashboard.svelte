@@ -6,9 +6,8 @@
 
     import HomeNavbar from "../../components/Navbars/HomeNavbar.svelte";
 
-    let tmp = ''; //TODO remove
-
     onMount(async () =>{
+        prompt("We use cookies") //TODO: Make a better banner for allow cookies / or maybe delete since we are using localstorage ?
         const jwtToken = window.localStorage.getItem('token');
         
         const res = await fetch('http://localhost:3000/api/auth', { 
@@ -18,19 +17,12 @@
 
        if(res.status === 200){
            authenticated.set(true);
-            tmp = 'yes' //TODO remove
         }
         else {
             authenticated.set(false)
-            tmp = 'no' //TODO remove
         };
     })
    
 </script>
 <HomeNavbar/>
-<h1>
-    Welcome to the dashboard
-</h1>
-<h2>
-    Go to <Link to="/">Home</Link>
-</h2>
+

@@ -4,7 +4,6 @@ export function getAllUsers(){
 return db.upathletes.find().toArray();
 };
 
-
 export function addNewUser(newUser){
      return db.upathletes.insertOne(newUser);
 };

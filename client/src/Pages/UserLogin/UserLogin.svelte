@@ -32,36 +32,23 @@
         }else{
             console.log("Access denied")
         }    
-     }
-            
-    }       
-
-
-        
-
+     }        
+}       
         //## TODO HREF using ROUTER look at: https://www.youtube.com/watch?v=LOZs0fpr4K4&t=134st
-        </script>
+</script>
 
-<div id="registerForm" class="h-screen bg-gray-50 flex justify-center items-center">
+<div id="registerForm" class="h-screen  bg-cover bg-center flex justify-center items-center" style="background-image: url('img/Bike.jpg');">
 	<div class="lg:w-2/5 md:w-1/2 w-2/3">
-		<div class="bg-white p-10 rounded-lg shadow-lg min-w-full">
-			<h1 class="text-center text-2xl mb-6 text-gray-600 font-bold font-sans">Login</h1>
+		<div class="bg-black p-10 rounded-lg shadow-lg min-w-full opacity-70">
+			<h1 class="text-center text-2xl mb-6 text-fuchsia-500 font-bold font-sans">Login</h1>
                 <Input label="E-Mail" bind:value={email} type="text" required/>
                 <Input label="Password" bind:value={password} type="password" required/>
 			    <ConfirmButton on:click={login}>Confirm</ConfirmButton>
                 <Toast/>
                 <div class="text-sm font-medium text-gray-500 dark:text-gray-300">
-                    Not registered? <Link to="/register" class="text-blue-700 hover:underline dark:text-blue-500">Create
+                    Not registered? <Link to="/register" class="text-fuchsia-500 hover:underline dark:text-blue-500">Create
                         account</Link>
-                </div>
-
-    </div>
+            </div>
+        </div>
 	</div>
 </div>
-
-<!--
-    <div class="text-sm font-medium text-gray-500 dark:text-gray-300">
-                    Not registered? <Link to="/register" class="text-blue-700 hover:underline dark:text-blue-500">Create
-                        account</Link>
-                </div>
--->

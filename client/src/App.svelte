@@ -7,7 +7,7 @@
 	import UserRegistration from "./Pages/UserRegistration/UserRegistration.svelte";
 	import UserLogin from "./Pages/UserLogin/UserLogin.svelte";
 
-
+	import Chat from "./Pages/Chat/Chat.svelte";
 
 	import Dashboard from "./Pages/Dashboard/Dashboard.svelte";
 
@@ -24,8 +24,10 @@
 
 
 <main>
-	<Router>
-		<Route path="/" component={Dashboard}/>
+		<Router>
+		<Route path="/" component={UserLogin}/>
+		<Route path="/dashboard" component={Dashboard}/>
+		<Route path="/register" component={UserRegistration}/>
 	</Router>
 	
 		<!--

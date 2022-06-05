@@ -8,10 +8,10 @@
     
   </script>
   
-  <label for={label} class="text-gray-800 font-semibold block my-3 text-md">{label}</label>
+  <label for={label} class="text-fuchsia-500 font-semibold block my-3 text-md">{label}</label>
 
   <div role="radiogroup" 
-                   class="group-container"
+                   class="group-container text-fuchsia-500"
                    aria-labelledby={`label-${uniqueID}`}
                    style="flex-direction:{flexDirection}" 
                    id={`group-${uniqueID}`}>
@@ -30,7 +30,7 @@
   
   <style>
               :root {
-          --accent-color: rgb(0, 0, 0);
+          --accent-color: rgb(229, 0, 255);
           --gray: #ccc;
       }
       
