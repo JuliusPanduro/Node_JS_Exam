@@ -6,6 +6,8 @@
 	import UserRegistration from "./Pages/UserRegistration/UserRegistration.svelte";
 	import UserLogin from "./Pages/UserLogin/UserLogin.svelte";
 	import Dashboard from "./Pages/Dashboard/Dashboard.svelte";
+	import Error from "./Pages/Error/Error.svelte";
+
 </script>
 
 <Tailwindcss/>
@@ -16,6 +18,7 @@
 		<Route path="/" component={UserLogin}/>
 		<Route path="/dashboard" component={Dashboard}/>
 		<Route path="/register" component={UserRegistration}/>
+		<Route path="/error" component={Error}/>
 	</Router>
 </main>
 

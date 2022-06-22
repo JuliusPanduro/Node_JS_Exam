@@ -6,6 +6,8 @@
     import { notifications } from "../../../scripts/Notification/notification";
     import Toast from "../../components/Toast/Toast.svelte";
 
+    import { authenticated } from '../../stores/auth.js';
+
         let email,password;
         let user;
        
@@ -20,8 +22,10 @@
                 'Content-Type': 'application/json'
             },
 		});
-		
+		authenticated.set(false);
         if(res.status === 200){
+            alert("We Use cookies");
+            authenticated.set(true);
             const content = await res.json();
             notifications.success("You are now logged in!",3000);
            user = {
@@ -34,12 +38,17 @@
             navigate('/dashboard',{replace: true})
             window.location.reload();
         }else if(res.status === 401){
+            authenticated.set(false);
+            notifications.danger("Wrong Password",3000);
             navigate('/',{replace: true})
-            console.log("Wrong password")
-        }else{
+        }else if(res.status === 400){
+            authenticated.set(false);
+            notifications.danger("Wrong Username",3000);
             navigate('/',{replace: true})
-            console.log("Access denied")
-        }    
+        } else{
+            authenticated.set(false);
+            navigate('/error',{replace: true})
+        }   
      }        
 }       
 </script>
