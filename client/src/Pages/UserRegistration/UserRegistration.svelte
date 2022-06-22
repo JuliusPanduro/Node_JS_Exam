@@ -4,14 +4,14 @@
     import Input from "../../components/Inputs/Input.svelte"
     import RadioGender from "../../components/Inputs/RadioGender.svelte"
 
-    import { Link, navigate } from 'svelte-routing';
+    import { navigate } from 'svelte-routing';
     import { notifications } from "../../../scripts/Notification/notification";
     import Toast from "../../components/Toast/Toast.svelte";
 
 
     let firstName,lastName,email,password;
 	let gender;
-	
+
 	const options = [{
 		value: 'male',
 		label: 'Male',
@@ -33,16 +33,14 @@
 		});
 
       if(res.status === 201){
-          const content = await res.json();
-          console.log(content);
-          //notifications.success("You are now signed up!",100);
+          notifications.success("You are now signed up!",1000);
           navigate('/',{replace: true});
-      }else{
+          window.location.reload();
+        }else{
           notifications.danger("User does already exist!",3000);
       }
     }
 }
-
 
 function cancel(){
    navigate('/',{replace: true})
@@ -62,7 +60,7 @@ function cancel(){
 			    <ConfirmButton on:click={signUp}>Confirm</ConfirmButton>
                 <CancelButton on:click={cancel}>Cancel</CancelButton>
                 <Toast/>
-     </div>
-	</div>
+            </div>
+        </div>
 </div>
 

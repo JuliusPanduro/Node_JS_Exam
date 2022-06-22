@@ -1,15 +1,14 @@
 <script>
     import ConfirmButton from "../../components/Buttons/ConfirmButton.svelte"
-    import CancelButton from "../../components/Buttons/CancelButton.svelte"
     import Input from "../../components/Inputs/Input.svelte"
      
-
     import { Link, navigate } from 'svelte-routing';
     import { notifications } from "../../../scripts/Notification/notification";
     import Toast from "../../components/Toast/Toast.svelte";
 
         let email,password;
-        
+        let user;
+       
         async function login(){
             if (email == undefined || password == undefined) {
                 notifications.danger("All fields are required to be filled out",3000);
@@ -24,17 +23,25 @@
 		
         if(res.status === 200){
             const content = await res.json();
-            console.log(content) //TODO AUTH IN FRONTEND USING TOKEN. LOCALSTORAGE OR COOKIES?
-            window.localStorage.setItem('token',content.my_token);
+            notifications.success("You are now logged in!",3000);
+           user = {
+                'email':content.email,
+                'firstname':content.firstname,
+                'lastname':content.lastName,
+                'token':content.my_token
+            }
+            window.localStorage.setItem('userinfo',JSON.stringify(user));
             navigate('/dashboard',{replace: true})
+            window.location.reload();
         }else if(res.status === 401){
+            navigate('/',{replace: true})
             console.log("Wrong password")
         }else{
+            navigate('/',{replace: true})
             console.log("Access denied")
         }    
      }        
 }       
-        //## TODO HREF using ROUTER look at: https://www.youtube.com/watch?v=LOZs0fpr4K4&t=134st
 </script>
 
 <div id="registerForm" class="h-screen  bg-cover bg-center flex justify-center items-center" style="background-image: url('img/Bike.jpg');">

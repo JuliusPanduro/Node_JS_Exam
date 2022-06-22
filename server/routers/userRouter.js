@@ -7,7 +7,13 @@ import { addNewUser, findUser } from "../database/userHandler.js";
 import {authenticateToken} from "../authentication/authToken.js";
 
 router.get('/api/auth', authenticateToken, (req,res)=>{
-    res.status(200).send("Welcome to the dashboard")
+       const authUser= ({
+        firstName : req.user.firstName,
+        lastName : req.user.lastName,
+        email : req.user.email,
+        gender : req.user.gender
+       });
+    res.status(200).send(authUser)
 });
 
 router.post('/api/registeruser', async (req,res)=>{
@@ -34,7 +40,7 @@ router.post('/api/login', async (req,res)=>{
           comparePassword(req.body.password,user.password).then(validPass =>{
                 if(validPass === true){
                 const accessToken =  jwt.sign(user, process.env.ACCESS_TOKEN_SECRET);    
-                        res.status(200).send({email:user.email,name:user.name,my_token: accessToken});
+                        res.status(200).send({email:user.email,firstname:user.firstName,lastName:user.lastName,my_token: accessToken});
                 }else{
                         res.status(401).send("Wrong Password")
                 }}).catch((err)=> console.error(err));                

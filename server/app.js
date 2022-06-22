@@ -4,9 +4,6 @@ const app = express();
 //for parsing JSON
 app.use(express.json());
 
-//For using forms in frontend
-app.use(express.urlencoded({ extended: true }));
-
 import path from "path";
 app.use(express.static(path.resolve("../client/public")));
 
@@ -36,16 +33,35 @@ const server = http.createServer(app);
 import { Server } from "socket.io";
 const io = new Server(server);
 
-const wrap = middleware => (socket,next) => middleware(socket.request, {},next);
-io.use(wrap);
+const wrap = middleware => (socket,next) => middleware(socket.request, {}, next);
+io.use(wrap(sessionMiddleware));
 
+const users = {};
 
+io.on('connection', (socket) => {
+  socket.on('new-user',name =>{
+    users[socket.id] = name;
+    socket.broadcast.emit('user-connected', name)
+  })
+   socket.on('chat-message', message => {
+    socket.broadcast.emit('chat-message',{message: message, name: users[socket.id]})
+  });
+  socket.on('disconnect',() =>{
+    socket.broadcast.emit('user-disconnected', users[socket.id])
+    delete users[socket.id]
+  })
+});
 
 
 import router from "./routers/userRouter.js";
 app.use(router,authLimiter);
 
+//For default fallback
+app.get('*', (req, res) => {
+  res.sendFile(path.resolve("../client/public/index.html"));
+});
+
 const PORT = process.env.PORT || 3000;
-app.listen(PORT, () =>{
+server.listen(PORT, () =>{
     console.log("Server is running on port: ",PORT);
 });

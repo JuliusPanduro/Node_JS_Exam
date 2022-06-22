@@ -5,7 +5,7 @@
   "scripts": {
     "build": "rollup -c",
     "dev": "rollup -c -w",
-    "start": "sirv public --no-clear"
+    "start": "sirv public --no-clear --single"
   },
   "devDependencies": {
     "@rollup/plugin-commonjs": "^16.0.0",
@@ -24,6 +24,7 @@
   },
   "dependencies": {
     "sirv-cli": "^2.0.0",
+    "socket.io-client": "^4.5.1",
     "svelte-loading-spinners": "^0.1.7",
     "svelte-routing": "^1.6.0"
   }
