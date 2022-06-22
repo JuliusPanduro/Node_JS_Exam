@@ -35,8 +35,10 @@ function connectedUser(message){
 }
 
 function appendMessage(message){
+  let timeStamp = new Date();
+  console.log(timeStamp.toLocaleTimeString('en-DK'))
   const messageElement = document.createElement('div')
-  messageElement.innerText = message;
+  messageElement.innerText = "Clock: "+timeStamp.toLocaleTimeString('en-DK')+" - "+message;
   const messageContainer = document.getElementById('message-container')
   messageContainer.append(messageElement)
 }
